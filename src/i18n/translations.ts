@@ -155,6 +155,6 @@ export const translations = {
     },
     langSwitch: { ru: "RU", uk: "UA" },
   },
-} as const;
+};
 
 export type Dict = (typeof translations)["ru"];
