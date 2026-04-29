@@ -72,7 +72,7 @@ export const translations = {
       socials: "Социальные сети",
     },
     footer: {
-      name: "Анна Иванова",
+      name: "Анна Шевченко",
       tagline: "Психотерапия и деликатность",
       rights: "Все права защищены",
     },
@@ -149,7 +149,7 @@ export const translations = {
       socials: "Соціальні мережі",
     },
     footer: {
-      name: "Анна Іванова",
+      name: "Анна Шевченко",
       tagline: "Психотерапія та делікатність",
       rights: "Усі права захищені",
     },

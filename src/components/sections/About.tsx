@@ -1,5 +1,5 @@
 import { useLang } from "@/i18n/LanguageContext";
-import portrait from "@/assets/portrait.jpg";
+import portrait from "@/assets/portrait.png";
 
 export const About = () => {
   const { t } = useLang();
