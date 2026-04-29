@@ -1,13 +1,13 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { translations, type Dict, type Lang } from "./translations";
 
-type Ctx = {
+export type Ctx = {
   lang: Lang;
   setLang: (l: Lang) => void;
   t: Dict;
 };
 
-const LanguageContext = createContext<Ctx | null>(null);
+export const LanguageContext = createContext<Ctx | null>(null);
 
 const STORAGE_KEY = "site-lang";
 
@@ -50,8 +50,4 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 };
 
-export const useLang = () => {
-  const ctx = useContext(LanguageContext);
-  if (!ctx) throw new Error("useLang must be used within LanguageProvider");
-  return ctx;
-};
+export { useLang } from "./useLang";
