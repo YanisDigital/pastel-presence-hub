@@ -1,4 +1,4 @@
-import { useLang } from "@/i18n/LanguageContext";
+import { useLang } from "@/i18n/useLang";
 import heroImg from "@/assets/hero.jpg";
 
 const TG_URL = "https://t.me/your_psychologist";
