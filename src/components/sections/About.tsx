@@ -1,4 +1,4 @@
-import { useLang } from "@/i18n/LanguageContext";
+import { useLang } from "@/i18n/useLang";
 import portrait from "@/assets/portrait.png";
 
 export const About = () => {
