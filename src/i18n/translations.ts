@@ -72,7 +72,7 @@ export const translations = {
       socials: "Социальные сети",
     },
     map: {
-      title: "Как нас найти",
+      title: "Как меня найти",
       address: "Одесса, Дерибасовская 10",
     },
     footer: {
@@ -153,7 +153,7 @@ export const translations = {
       socials: "Соціальні мережі",
     },
     map: {
-      title: "Як нас знайти",
+      title: "Як мене знайти",
       address: "Одеса, Дерибасівська 10",
     },
     footer: {
