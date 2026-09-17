@@ -1,3 +1,6 @@
+// Portfolio showcase: contact links are inert and the form never sends.
+export const IS_DEMO = true;
+
 // Central place for contact details. Replace the placeholder values below
 // with the real ones before going live.
 export const CONTACT = {

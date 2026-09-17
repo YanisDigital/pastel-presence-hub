@@ -1,10 +1,11 @@
 import { useLang } from "@/i18n/useLang";
+import { IS_DEMO } from "@/config";
 
 export const Footer = () => {
   const { t } = useLang();
   const year = new Date().getFullYear();
   return (
-    <footer className="bg-ink text-paper border-t border-paper/10">
+    <footer className={`bg-ink text-paper border-t border-paper/10 ${IS_DEMO ? "pb-9" : ""}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-10 py-12 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
         <div className="font-display italic text-xl">{t.footer.name}</div>
         <div className="text-xs italic text-paper/65">{t.footer.tagline}</div>

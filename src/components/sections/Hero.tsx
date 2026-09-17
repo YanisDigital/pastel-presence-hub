@@ -1,10 +1,12 @@
 import { ArrowRight } from "lucide-react";
 import { useLang } from "@/i18n/useLang";
+import { useDemoLink } from "@/hooks/useDemoLink";
 import { CONTACT } from "@/config";
 import heroImg from "@/assets/hero.jpg";
 
 export const Hero = () => {
   const { t } = useLang();
+  const link = useDemoLink();
   return (
     <section id="top" className="relative isolate pt-40 md:pt-48 pb-24 md:pb-32 px-6">
       <div className="ambient" aria-hidden />
@@ -23,9 +25,7 @@ export const Hero = () => {
           {t.hero.lead}
         </p>
         <a
-          href={CONTACT.telegram}
-          target="_blank"
-          rel="noopener noreferrer"
+          {...link({ href: CONTACT.telegram, target: "_blank", rel: "noopener noreferrer" })}
           className="group breathe inline-flex items-center gap-3 px-10 py-4 bg-ink text-paper rounded-full text-sm tracking-[0.15em] uppercase font-medium hover:bg-ink/90 transition-colors duration-300"
         >
           {t.hero.cta}

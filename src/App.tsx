@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import { IS_DEMO } from "./config";
 
 const queryClient = new QueryClient();
 
@@ -12,7 +13,10 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
-      <Sonner />
+      <Sonner
+        offset={IS_DEMO ? 56 : undefined}
+        mobileOffset={IS_DEMO ? { bottom: 56 } : undefined}
+      />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />

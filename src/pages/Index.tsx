@@ -1,5 +1,6 @@
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import { SiteNav } from "@/components/SiteNav";
+import { DemoBanner } from "@/components/DemoBanner";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Approach } from "@/components/sections/Approach";
@@ -22,6 +23,7 @@ const Index = () => {
         <Contact />
         <MapSection />
         <Footer />
+        <DemoBanner />
       </main>
     </LanguageProvider>
   );
