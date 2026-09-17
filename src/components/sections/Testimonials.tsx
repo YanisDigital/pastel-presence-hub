@@ -43,7 +43,7 @@ export const Testimonials = () => {
                 key={item.name}
                 className="pl-4 sm:basis-1/2 lg:basis-1/3"
               >
-                <article className="h-full bg-white border border-ink/10 rounded-2xl p-8 flex flex-col gap-5 shadow-sm">
+                <article className="h-full bg-white border border-ink/10 rounded-2xl p-8 flex flex-col gap-5 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-ink/5 hover:border-sage/40">
                   <div className="flex items-center gap-4">
                     <div className="w-14 h-14 rounded-full bg-sage/15 flex items-center justify-center font-display italic text-xl text-sage-deep">
                       {item.name.charAt(0)}

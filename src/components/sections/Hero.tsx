@@ -6,8 +6,9 @@ import heroImg from "@/assets/hero.jpg";
 export const Hero = () => {
   const { t } = useLang();
   return (
-    <section id="top" className="relative pt-40 md:pt-48 pb-24 md:pb-32 px-6">
-      <div className="max-w-4xl mx-auto text-center fade-in-up">
+    <section id="top" className="relative isolate pt-40 md:pt-48 pb-24 md:pb-32 px-6">
+      <div className="ambient" aria-hidden />
+      <div className="max-w-4xl mx-auto text-center hero-stagger">
         <span className="inline-flex items-center gap-2.5 text-[11px] md:text-xs uppercase tracking-[0.28em] text-ink/65 mb-8">
           <span className="inline-block w-5 h-px bg-sage" aria-hidden />
           {t.hero.eyebrow}
@@ -25,7 +26,7 @@ export const Hero = () => {
           href={CONTACT.telegram}
           target="_blank"
           rel="noopener noreferrer"
-          className="group inline-flex items-center gap-3 px-10 py-4 bg-ink text-paper rounded-full text-sm tracking-[0.15em] uppercase font-medium hover:bg-ink/90 transition-all duration-300 hover:shadow-xl hover:shadow-ink/15"
+          className="group breathe inline-flex items-center gap-3 px-10 py-4 bg-ink text-paper rounded-full text-sm tracking-[0.15em] uppercase font-medium hover:bg-ink/90 transition-colors duration-300"
         >
           {t.hero.cta}
           <ArrowRight
@@ -43,7 +44,7 @@ export const Hero = () => {
             width={1600}
             height={900}
             decoding="async"
-            className="w-full h-full object-cover"
+            className="parallax-img w-full h-full object-cover"
           />
           {/* subtle sage frame echoing the brand's cool accent */}
           <div
