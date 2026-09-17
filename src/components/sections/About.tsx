@@ -1,6 +1,6 @@
 import { useLang } from "@/i18n/useLang";
 import { useReveal } from "@/hooks/useReveal";
-import portrait from "@/assets/portrait.jpg";
+import portrait from "@/assets/doctor1.webp";
 
 export const About = () => {
   const { t } = useLang();
