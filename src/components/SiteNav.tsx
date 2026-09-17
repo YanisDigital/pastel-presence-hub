@@ -7,6 +7,8 @@ import {
   SheetContent,
   SheetTrigger,
   SheetClose,
+  SheetTitle,
+  SheetDescription,
 } from "@/components/ui/sheet";
 
 export const SiteNav = () => {
@@ -62,7 +64,7 @@ export const SiteNav = () => {
           <Sheet>
             <SheetTrigger
               className="md:hidden grid place-items-center size-11 -mr-2 rounded-full text-ink/80 hover:text-ink transition-colors"
-              aria-label={t.nav.about}
+              aria-label={t.nav.menu}
             >
               <Menu className="size-5" aria-hidden />
             </SheetTrigger>
@@ -70,9 +72,10 @@ export const SiteNav = () => {
               side="right"
               className="w-72 bg-paper border-l border-ink/10 flex flex-col"
             >
-              <span className="font-display italic text-xl text-ink mt-2 mb-10">
+              <SheetTitle className="font-display italic text-xl font-normal text-ink mt-2 mb-10">
                 {t.footer.name}
-              </span>
+              </SheetTitle>
+              <SheetDescription className="sr-only">{t.nav.menu}</SheetDescription>
               <div className="flex flex-col gap-1">
                 {links.map((l) => (
                   <SheetClose asChild key={l.href}>

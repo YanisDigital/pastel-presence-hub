@@ -23,4 +23,4 @@ npm run dev
 
 ## Лицензии
 
-Шрифты Fraunces и Manrope — SIL Open Font License. Изображения используются только в демонстрационных целях.
+Шрифты Fraunces и Manrope — SIL Open Font License. Портрет и обложка сгенерированы ИИ — реальных людей на сайте нет.

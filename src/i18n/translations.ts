@@ -7,6 +7,7 @@ export const translations = {
       approach: "Подход",
       services: "Услуги",
       contact: "Контакты",
+      menu: "Меню навигации",
     },
     hero: {
       eyebrow: "Психолог · Психотерапевт",
@@ -140,6 +141,7 @@ export const translations = {
       approach: "Підхід",
       services: "Послуги",
       contact: "Контакти",
+      menu: "Меню навігації",
     },
     hero: {
       eyebrow: "Психолог · Психотерапевт",
