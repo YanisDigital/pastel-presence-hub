@@ -112,6 +112,103 @@
     opacity: 1;
     transform: none;
   }
+
+  /* Children fade in one after another once the ancestor .reveal is visible */
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .is-visible .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-stagger > *:nth-child(2) { transition-delay: 0.12s; }
+  .reveal-stagger > *:nth-child(3) { transition-delay: 0.24s; }
+  .reveal-stagger > *:nth-child(4) { transition-delay: 0.36s; }
+  .reveal-stagger > *:nth-child(5) { transition-delay: 0.48s; }
+  .reveal-stagger > *:nth-child(6) { transition-delay: 0.6s; }
+
+  .hero-stagger > * {
+    animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .hero-stagger > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero-stagger > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-stagger > *:nth-child(4) { animation-delay: 0.45s; }
+
+  /* Slow-drifting sage/rose light behind the hero — a quiet "breath" */
+  .ambient {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .ambient::before,
+  .ambient::after {
+    content: "";
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(90px);
+    will-change: transform;
+    animation: drift 24s ease-in-out infinite alternate;
+  }
+  .ambient::before {
+    width: 34rem;
+    height: 34rem;
+    top: -8rem;
+    left: -10rem;
+    background: hsl(var(--sage) / 0.28);
+  }
+  .ambient::after {
+    width: 40rem;
+    height: 40rem;
+    top: 28%;
+    right: -14rem;
+    background: hsl(var(--rose) / 0.3);
+    animation-duration: 30s;
+    animation-delay: -12s;
+  }
+
+  /* CTA halo that expands and fades at a calm breathing tempo */
+  .breathe {
+    animation: breathe 5s ease-in-out infinite;
+  }
+
+  /* Scroll-linked drift for images; progressive enhancement only */
+  @supports (animation-timeline: view()) {
+    .parallax-img {
+      animation: parallax linear both;
+      animation-timeline: view();
+    }
+  }
+}
+
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(3rem, 4rem) scale(1.12); }
+}
+
+@keyframes breathe {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--sage) / 0.35); }
+  50% { box-shadow: 0 0 0 14px hsl(var(--sage) / 0); }
+}
+
+@keyframes parallax {
+  from { transform: translateY(-7%) scale(1.14); }
+  to { transform: translateY(7%) scale(1.14); }
+}
+
+/* Paper grain — barely-there texture that keeps flat fills from feeling digital */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @keyframes fadeInUp {
@@ -138,8 +235,16 @@
     transition-duration: 0.01ms !important;
   }
   .fade-in-up,
-  .reveal {
+  .reveal,
+  .reveal-stagger > *,
+  .hero-stagger > * {
     opacity: 1 !important;
     transform: none !important;
+  }
+  .ambient::before,
+  .ambient::after,
+  .breathe,
+  .parallax-img {
+    animation: none !important;
   }
 }

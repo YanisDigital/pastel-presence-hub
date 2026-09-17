@@ -21,14 +21,14 @@ export const About = () => {
               decoding="async"
               width={800}
               height={1024}
-              className="w-full h-full object-cover"
+              className="parallax-img w-full h-full object-cover"
             />
           </div>
           <div className="hidden md:flex absolute -bottom-10 -right-10 size-60 bg-paper p-8 rounded-full border border-sage/30 items-center justify-center text-center italic font-display text-lg leading-snug text-ink/80 shadow-sm">
             {t.about.badge}
           </div>
         </div>
-        <div className="space-y-8">
+        <div className="space-y-8 reveal-stagger">
           <span className="inline-flex items-center gap-2.5 text-xs uppercase tracking-[0.28em] text-sage-deep font-medium">
             <span className="w-5 h-px bg-sage" aria-hidden />
             {t.about.eyebrow}

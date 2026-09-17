@@ -18,7 +18,7 @@ export const Services = () => {
             {t.services.title}
           </h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 reveal-stagger">
           {t.services.items.map((item, idx) => (
             <article
               key={item.t}

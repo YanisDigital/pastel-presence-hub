@@ -20,13 +20,13 @@ export const Approach = () => {
         </div>
 
         {/* Numbered editorial list */}
-        <div className="divide-y divide-ink/10 border-t border-ink/10">
+        <div className="divide-y divide-ink/10 border-t border-ink/10 reveal-stagger">
           {t.approach.items.map((item) => (
             <article
               key={item.n}
               className="grid md:grid-cols-[auto_1fr] gap-6 md:gap-16 py-10 md:py-14 group"
             >
-              <span className="font-display text-5xl md:text-7xl text-sage leading-none tabular-nums transition-colors group-hover:text-sage-deep">
+              <span className="font-display text-5xl md:text-7xl text-sage leading-none tabular-nums transition-all duration-500 group-hover:text-sage-deep group-hover:translate-x-1">
                 {item.n}
               </span>
               <div className="space-y-4 max-w-2xl">
