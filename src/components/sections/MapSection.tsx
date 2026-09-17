@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MapPin } from "lucide-react";
 import { useLang } from "@/i18n/useLang";
-import { MAP } from "@/config";
+import { IS_DEMO, MAP } from "@/config";
 
 export const MapSection = () => {
   const { t } = useLang();
@@ -13,6 +13,7 @@ export const MapSection = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-10 pt-20 md:pt-28 pb-10 md:pb-14 text-center">
         <p className="text-[11px] uppercase tracking-[0.28em] text-ink/60 mb-4">
           {t.map.address}
+          {IS_DEMO && <span className="text-ink/45"> · {t.demo.address}</span>}
         </p>
         <h2 className="font-display text-4xl md:text-5xl font-light italic text-ink">
           {t.map.title}
@@ -27,7 +28,7 @@ export const MapSection = () => {
             height="450"
             style={{ border: 0, display: "block" }}
             loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
+            referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
             className="w-full h-[450px]"
           />

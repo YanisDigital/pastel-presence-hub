@@ -5,8 +5,10 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  // GitHub Pages serves the site under the repository name.
+  base: mode === "production" ? "/pastel-presence-hub/" : "/",
   server: {
-    host: "::",
+    host: "localhost",
     port: 8080,
     hmr: {
       overlay: false,
