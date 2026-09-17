@@ -1,60 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Manrope:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&family=Manrope:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Editorial Sanctuary — design system. All colors HSL. */
+/* Quiet Editorial — design system. All colors HSL.
+   Warm paper + ink, with two restrained accents: rose (warm) and sage (cool).
+   *-deep variants are text-safe (≥4.5:1 on paper); base variants are decorative. */
 
 @layer base {
   :root {
-    --background: 36 33% 98%;        /* paper #FCFAF7 */
-    --foreground: 30 4% 19%;         /* ink #32302F */
+    --background: 36 33% 98%;        /* paper #FCFAF6 */
+    --foreground: 28 6% 16%;         /* ink — deepened for AA contrast */
 
     --card: 0 0% 100%;
-    --card-foreground: 30 4% 19%;
+    --card-foreground: 28 6% 16%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 30 4% 19%;
+    --popover-foreground: 28 6% 16%;
 
-    --primary: 30 4% 19%;            /* ink */
+    --primary: 28 6% 16%;            /* ink */
     --primary-foreground: 36 33% 98%;
 
     --secondary: 22 25% 89%;         /* blush #EADEDA */
-    --secondary-foreground: 30 4% 19%;
+    --secondary-foreground: 28 6% 16%;
 
     --muted: 28 33% 93%;             /* clay #F2E9E4 */
-    --muted-foreground: 30 4% 40%;
+    --muted-foreground: 28 6% 38%;
 
-    --accent: 16 31% 74%;            /* rose #D4B2A7 */
-    --accent-foreground: 30 4% 19%;
+    --accent: 14 32% 72%;            /* rose */
+    --accent-foreground: 28 6% 16%;
 
-    --destructive: 0 60% 55%;
+    --destructive: 0 60% 48%;
     --destructive-foreground: 36 33% 98%;
 
-    --border: 16 31% 74% / 0.18;
-    --input: 22 25% 89%;
-    --ring: 16 31% 74%;
+    --border: 28 6% 16% / 0.10;
+    --input: 22 18% 82%;
+    --ring: 104 20% 30%;             /* sage-deep focus ring */
 
     /* Brand semantic tokens */
     --paper: 36 33% 98%;
     --blush: 22 25% 89%;
-    --rose: 16 31% 74%;
-    --sage: 90 11% 59%;
-    --ink: 30 4% 19%;
     --clay: 28 33% 93%;
+    --ink: 28 6% 16%;
+
+    --rose: 14 32% 72%;              /* decorative warm accent / CTA */
+    --rose-deep: 12 36% 43%;         /* text-safe warm accent */
+    --sage: 100 14% 55%;             /* decorative cool accent */
+    --sage-deep: 104 20% 30%;        /* text-safe cool accent */
 
     --radius: 1rem;
 
     /* Sidebar (unused but kept) */
     --sidebar-background: 36 33% 98%;
-    --sidebar-foreground: 30 4% 19%;
-    --sidebar-primary: 30 4% 19%;
+    --sidebar-foreground: 28 6% 16%;
+    --sidebar-primary: 28 6% 16%;
     --sidebar-primary-foreground: 36 33% 98%;
     --sidebar-accent: 28 33% 93%;
-    --sidebar-accent-foreground: 30 4% 19%;
-    --sidebar-border: 16 31% 74%;
-    --sidebar-ring: 16 31% 74%;
+    --sidebar-accent-foreground: 28 6% 16%;
+    --sidebar-border: 28 6% 16%;
+    --sidebar-ring: 104 20% 30%;
   }
 }
 
@@ -67,17 +72,26 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-feature-settings: "ss01", "ss02";
+    font-feature-settings: "ss01";
+  }
+  /* Visible, on-brand focus ring for keyboard users */
+  :focus-visible {
+    outline: 2px solid hsl(var(--sage-deep));
+    outline-offset: 3px;
+    border-radius: 4px;
   }
   ::selection {
-    background: hsl(var(--rose) / 0.25);
+    background: hsl(var(--rose) / 0.3);
   }
 }
 
 @layer utilities {
-  .font-serif-display {
-    font-family: 'Cormorant Garamond', serif;
-    letter-spacing: -0.01em;
+  /* Fraunces display: high optical size, gentle SOFT for a hand-set warmth,
+     WONK off to stay legible. Italic is opt-in, not the default. */
+  .font-display {
+    font-family: 'Fraunces', Georgia, serif;
+    font-variation-settings: "opsz" 144, "SOFT" 28, "WONK" 0;
+    letter-spacing: -0.015em;
   }
   .text-balance {
     text-wrap: balance;
@@ -88,6 +102,113 @@
   .fade-in-up {
     animation: fadeInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Children fade in one after another once the ancestor .reveal is visible */
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .is-visible .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-stagger > *:nth-child(2) { transition-delay: 0.12s; }
+  .reveal-stagger > *:nth-child(3) { transition-delay: 0.24s; }
+  .reveal-stagger > *:nth-child(4) { transition-delay: 0.36s; }
+  .reveal-stagger > *:nth-child(5) { transition-delay: 0.48s; }
+  .reveal-stagger > *:nth-child(6) { transition-delay: 0.6s; }
+
+  .hero-stagger > * {
+    animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .hero-stagger > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero-stagger > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-stagger > *:nth-child(4) { animation-delay: 0.45s; }
+
+  /* Slow-drifting sage/rose light behind the hero — a quiet "breath" */
+  .ambient {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .ambient::before,
+  .ambient::after {
+    content: "";
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(90px);
+    will-change: transform;
+    animation: drift 24s ease-in-out infinite alternate;
+  }
+  .ambient::before {
+    width: 34rem;
+    height: 34rem;
+    top: -8rem;
+    left: -10rem;
+    background: hsl(var(--sage) / 0.28);
+  }
+  .ambient::after {
+    width: 40rem;
+    height: 40rem;
+    top: 28%;
+    right: -14rem;
+    background: hsl(var(--rose) / 0.3);
+    animation-duration: 30s;
+    animation-delay: -12s;
+  }
+
+  /* CTA halo that expands and fades at a calm breathing tempo */
+  .breathe {
+    animation: breathe 5s ease-in-out infinite;
+  }
+
+  /* Scroll-linked drift for images; progressive enhancement only */
+  @supports (animation-timeline: view()) {
+    .parallax-img {
+      animation: parallax linear both;
+      animation-timeline: view();
+    }
+  }
+}
+
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(3rem, 4rem) scale(1.12); }
+}
+
+@keyframes breathe {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--sage) / 0.35); }
+  50% { box-shadow: 0 0 0 14px hsl(var(--sage) / 0); }
+}
+
+@keyframes parallax {
+  from { transform: translateY(-7%) scale(1.14); }
+  to { transform: translateY(7%) scale(1.14); }
+}
+
+/* Paper grain — barely-there texture that keeps flat fills from feeling digital */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @keyframes fadeInUp {
@@ -98,5 +219,32 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .fade-in-up,
+  .reveal,
+  .reveal-stagger > *,
+  .hero-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .ambient::before,
+  .ambient::after,
+  .breathe,
+  .parallax-img {
+    animation: none !important;
   }
 }

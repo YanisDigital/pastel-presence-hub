@@ -2,6 +2,7 @@ import { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Star } from "lucide-react";
 import { useLang } from "@/i18n/useLang";
+import { useReveal } from "@/hooks/useReveal";
 import {
   Carousel,
   CarouselContent,
@@ -15,18 +16,20 @@ export const Testimonials = () => {
   const autoplay = useRef(
     Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true })
   );
+  const ref = useReveal<HTMLDivElement>();
 
   return (
     <section id="testimonials" className="py-28 md:py-40 bg-paper">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="text-center mb-20 max-w-2xl mx-auto">
-          <span className="block text-xs uppercase tracking-[0.32em] text-rose mb-6">
+      <div ref={ref} className="reveal max-w-7xl mx-auto px-6 md:px-10">
+        <div className="text-center mb-16 md:mb-20 max-w-2xl mx-auto">
+          <span className="inline-flex items-center gap-2.5 text-xs uppercase tracking-[0.28em] text-rose-deep font-medium mb-6">
+            <span className="w-5 h-px bg-rose" aria-hidden />
             {t.testimonials.eyebrow}
+            <span className="w-5 h-px bg-rose" aria-hidden />
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl font-light italic">
+          <h2 className="font-display text-4xl md:text-5xl font-light">
             {t.testimonials.title}
           </h2>
-          <div className="w-12 h-px bg-rose mx-auto mt-10" />
         </div>
 
         <Carousel
@@ -40,20 +43,20 @@ export const Testimonials = () => {
                 key={item.name}
                 className="pl-4 sm:basis-1/2 lg:basis-1/3"
               >
-                <article className="h-full bg-background/60 border border-rose/15 rounded-2xl p-8 flex flex-col gap-5 shadow-sm">
+                <article className="h-full bg-white border border-ink/10 rounded-2xl p-8 flex flex-col gap-5 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-ink/5 hover:border-sage/40">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full bg-rose/15 flex items-center justify-center font-serif italic text-xl text-rose">
+                    <div className="w-14 h-14 rounded-full bg-sage/15 flex items-center justify-center font-display italic text-xl text-sage-deep">
                       {item.name.charAt(0)}
                     </div>
                     <div>
-                      <h3 className="font-serif text-lg text-ink">
+                      <h3 className="font-display text-lg text-ink">
                         {item.name}
                       </h3>
                       <div className="flex gap-0.5 mt-1" aria-label="5 stars">
                         {Array.from({ length: 5 }).map((_, i) => (
                           <Star
                             key={i}
-                            className="w-3.5 h-3.5 fill-rose text-rose"
+                            className="w-3.5 h-3.5 fill-rose-deep text-rose-deep"
                           />
                         ))}
                       </div>
@@ -66,11 +69,11 @@ export const Testimonials = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex -left-2 border-rose/30 text-rose hover:bg-rose/10 hover:text-rose" />
-          <CarouselNext className="hidden md:flex -right-2 border-rose/30 text-rose hover:bg-rose/10 hover:text-rose" />
+          <CarouselPrevious className="hidden md:flex -left-2 border-ink/20 text-ink/70 hover:bg-sage/10 hover:text-sage-deep" />
+          <CarouselNext className="hidden md:flex -right-2 border-ink/20 text-ink/70 hover:bg-sage/10 hover:text-sage-deep" />
         </Carousel>
 
-        <p className="text-center text-xs text-ink/50 italic mt-12">
+        <p className="text-center text-xs text-ink/60 italic mt-12">
           {t.testimonials.disclaimer}
         </p>
       </div>

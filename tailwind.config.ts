@@ -13,7 +13,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Manrope', 'system-ui', 'sans-serif'],
-        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        serif: ['Fraunces', 'Georgia', 'serif'],
       },
       colors: {
         border: "hsl(var(--rose) / 0.18)",
@@ -52,7 +52,9 @@ export default {
         paper: "hsl(var(--paper))",
         blush: "hsl(var(--blush))",
         rose: "hsl(var(--rose))",
+        "rose-deep": "hsl(var(--rose-deep))",
         sage: "hsl(var(--sage))",
+        "sage-deep": "hsl(var(--sage-deep))",
         ink: "hsl(var(--ink))",
         clay: "hsl(var(--clay))",
       },
