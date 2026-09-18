@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
 import { useLang } from "@/i18n/useLang";
+import { useActiveSection } from "@/hooks/useActiveSection";
 import { LangSwitcher } from "./LangSwitcher";
 import {
   Sheet,
@@ -11,9 +12,12 @@ import {
   SheetDescription,
 } from "@/components/ui/sheet";
 
+const SECTION_IDS = ["about", "approach", "services", "contact"] as const;
+
 export const SiteNav = () => {
   const { t } = useLang();
   const [scrolled, setScrolled] = useState(false);
+  const active = useActiveSection(SECTION_IDS);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -23,10 +27,10 @@ export const SiteNav = () => {
   }, []);
 
   const links = [
-    { href: "#about", label: t.nav.about },
-    { href: "#approach", label: t.nav.approach },
-    { href: "#services", label: t.nav.services },
-    { href: "#contact", label: t.nav.contact },
+    { id: "about", href: "#about", label: t.nav.about },
+    { id: "approach", href: "#approach", label: t.nav.approach },
+    { id: "services", href: "#services", label: t.nav.services },
+    { id: "contact", href: "#contact", label: t.nav.contact },
   ];
 
   return (
@@ -37,6 +41,9 @@ export const SiteNav = () => {
           : "py-7"
       }`}
     >
+      {/* Reading progress — scroll-driven, no JS; absent where unsupported */}
+      <div className="scroll-progress" aria-hidden />
+
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between gap-6">
         <a
           href="#top"
@@ -50,9 +57,18 @@ export const SiteNav = () => {
             <a
               key={l.href}
               href={l.href}
-              className="hover:text-ink transition-colors"
+              aria-current={active === l.id ? "true" : undefined}
+              className={`relative transition-colors duration-300 hover:text-ink ${
+                active === l.id ? "text-ink" : ""
+              }`}
             >
               {l.label}
+              <span
+                className={`absolute -bottom-1.5 inset-x-0 h-px bg-sage origin-left transition-transform duration-500 ease-out ${
+                  active === l.id ? "scale-x-100" : "scale-x-0"
+                }`}
+                aria-hidden
+              />
             </a>
           ))}
         </div>

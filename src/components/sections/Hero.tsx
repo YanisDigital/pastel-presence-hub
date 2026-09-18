@@ -1,14 +1,20 @@
 import { ArrowRight } from "lucide-react";
 import { useLang } from "@/i18n/useLang";
 import { useDemoLink } from "@/hooks/useDemoLink";
+import { usePointerGlow } from "@/hooks/usePointerGlow";
 import { CONTACT } from "@/config";
 import heroImg from "@/assets/hero.jpg";
 
 export const Hero = () => {
   const { t } = useLang();
   const link = useDemoLink();
+  const glowRef = usePointerGlow<HTMLElement>();
   return (
-    <section id="top" className="relative isolate pt-40 md:pt-48 pb-24 md:pb-32 px-6">
+    <section
+      ref={glowRef}
+      id="top"
+      className="relative isolate pt-40 md:pt-48 pb-24 md:pb-32 px-6"
+    >
       <div className="ambient" aria-hidden />
       <div className="max-w-4xl mx-auto text-center hero-stagger">
         <span className="inline-flex items-center gap-2.5 text-[11px] md:text-xs uppercase tracking-[0.28em] text-ink/65 mb-8">

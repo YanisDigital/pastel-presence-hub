@@ -150,6 +150,11 @@
     top: -8rem;
     left: -10rem;
     background: hsl(var(--sage) / 0.28);
+    /* `translate` composes with the drift animation's `transform` instead of
+       fighting it; the two layers shift opposite ways for a sense of depth. */
+    translate: calc((var(--pointer-x, 0.5) - 0.5) * 3.5rem)
+      calc((var(--pointer-y, 0.5) - 0.5) * 2.5rem);
+    transition: translate 1.6s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .ambient::after {
     width: 40rem;
@@ -159,6 +164,28 @@
     background: hsl(var(--rose) / 0.3);
     animation-duration: 30s;
     animation-delay: -12s;
+    translate: calc((var(--pointer-x, 0.5) - 0.5) * -2.5rem)
+      calc((var(--pointer-y, 0.5) - 0.5) * -1.75rem);
+    transition: translate 2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Reading progress: a sage hairline that tracks scroll position */
+  .scroll-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: hsl(var(--sage) / 0.75);
+    transform: scaleX(0);
+    transform-origin: left;
+    pointer-events: none;
+  }
+  @supports (animation-timeline: scroll()) {
+    .scroll-progress {
+      animation: progress linear both;
+      animation-timeline: scroll(root block);
+    }
   }
 
   /* CTA halo that expands and fades at a calm breathing tempo */
@@ -213,6 +240,11 @@
   to { transform: translateY(7%) scale(1.14); }
 }
 
+@keyframes progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 /* Paper grain — barely-there texture that keeps flat fills from feeling digital */
 body::after {
   content: "";
@@ -259,5 +291,10 @@ body::after {
   .breathe,
   .parallax-img {
     animation: none !important;
+  }
+  /* Scroll-linked, so it only moves when the user scrolls: keep it rather than
+     let the blanket duration override above distort the scroll mapping. */
+  .scroll-progress {
+    animation-duration: auto !important;
   }
 }
