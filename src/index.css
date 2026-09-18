@@ -166,6 +166,29 @@
     animation: breathe 5s ease-in-out infinite;
   }
 
+  /* Sage rule drawn left-to-right over each divider as the list reveals */
+  .draw-rules > * {
+    position: relative;
+  }
+  .draw-rules > *::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: hsl(var(--sage) / 0.6);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .is-visible .draw-rules > *::before {
+    transform: scaleX(1);
+  }
+  .draw-rules > *:nth-child(2)::before { transition-delay: 0.18s; }
+  .draw-rules > *:nth-child(3)::before { transition-delay: 0.36s; }
+  .draw-rules > *:nth-child(4)::before { transition-delay: 0.54s; }
+
   /* Scroll-linked drift for images; progressive enhancement only */
   @supports (animation-timeline: view()) {
     .parallax-img {

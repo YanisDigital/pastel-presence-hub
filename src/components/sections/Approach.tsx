@@ -20,7 +20,7 @@ export const Approach = () => {
         </div>
 
         {/* Numbered editorial list */}
-        <div className="divide-y divide-ink/10 border-t border-ink/10 reveal-stagger">
+        <div className="divide-y divide-ink/10 border-t border-ink/10 reveal-stagger draw-rules">
           {t.approach.items.map((item) => (
             <article
               key={item.n}
