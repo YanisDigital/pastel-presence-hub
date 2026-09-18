@@ -50,16 +50,6 @@
     --sage-deep: 104 20% 30%;        /* text-safe cool accent */
 
     --radius: 1rem;
-
-    /* Sidebar (unused but kept) */
-    --sidebar-background: 36 33% 98%;
-    --sidebar-foreground: 28 6% 16%;
-    --sidebar-primary: 28 6% 16%;
-    --sidebar-primary-foreground: 36 33% 98%;
-    --sidebar-accent: 28 33% 93%;
-    --sidebar-accent-foreground: 28 6% 16%;
-    --sidebar-border: 28 6% 16%;
-    --sidebar-ring: 104 20% 30%;
   }
 }
 
