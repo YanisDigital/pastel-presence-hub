@@ -13,24 +13,30 @@ const STORAGE_KEY = "site-lang";
 
 const getInitialLang = (): Lang => {
   if (typeof window === "undefined") return "ru";
-  const stored = window.localStorage.getItem(STORAGE_KEY);
-  if (stored === "ru" || stored === "uk") return stored;
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    if (stored === "ru" || stored === "uk") return stored;
+  } catch {
+    // localStorage can throw in private browsing / with storage disabled.
+  }
   const nav = window.navigator.language?.toLowerCase() ?? "";
   if (nav.startsWith("uk")) return "uk";
   return "ru";
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [lang, setLangState] = useState<Lang>("ru");
+  // Resolved synchronously so the first render already matches the
+  // stored/browser preference — avoids a flash of the wrong language.
+  const [lang, setLangState] = useState<Lang>(getInitialLang);
 
   useEffect(() => {
-    setLangState(getInitialLang());
-  }, []);
-
-  useEffect(() => {
-    if (typeof document !== "undefined") {
-      document.documentElement.lang = lang === "uk" ? "uk" : "ru";
-    }
+    if (typeof document === "undefined") return;
+    const dict = translations[lang];
+    document.documentElement.lang = lang === "uk" ? "uk" : "ru";
+    document.title = dict.meta.title;
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute("content", dict.meta.description);
   }, [lang]);
 
   const setLang = (l: Lang) => {
@@ -38,7 +44,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     try {
       window.localStorage.setItem(STORAGE_KEY, l);
     } catch {
-      /* ignore */
+      // ignore: persistence is a nicety, not a requirement
     }
   };
 
@@ -49,5 +55,3 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 };
-
-
